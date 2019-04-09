@@ -34,7 +34,16 @@ sysctl vm.max_map_count 查看值是否修改， 也可以通过sysctl -w vm.max
 
 2.部署
    2.1部署jdk
-   
+   [elastic@master ~]$ ll
+总用量 187324
+lrwxrwxrwx 1 elastic elastic        12 4月   9 16:12 jdk -> jdk1.8.0_201
+drwxr-xr-x 7 elastic elastic       245 12月 16 03:48 jdk1.8.0_201
+    添加环境变量
+    [elastic@master ~]$ cat .bash_profile 
+JAVA_HOME=$HOME/jdk
+PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME PATH
+
   
 
 
