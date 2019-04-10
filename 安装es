@@ -9,6 +9,8 @@
 
 *       soft    nofile  65536
 *       hard    nofile  65536
+*       soft    nproc   4096
+*       hard    nproc   4096
 
 
 ####基础
@@ -47,6 +49,7 @@ drwxr-xr-x 7 elastic elastic       245 12月 16 03:48 jdk1.8.0_201
 JAVA_HOME=$HOME/jdk
 PATH=$JAVA_HOME/bin:$PATH
 export JAVA_HOME PATH
+
 
   
 
