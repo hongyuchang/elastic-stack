@@ -1,0 +1,13 @@
+1.常用插件-head
+安装node,下载二进制包
+wget https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz
+解压
+tar xf node-v10.15.3-linux-x64.tar.xz
+配置环境变量
+NODE_HOME=$HOME/node-v10.15.3-linux-x64
+PATH=$NODE_HOME/bin:$PATH
+export NODE_HOME PATH
+
+验证
+[elastic@master ~]$ node -v
+v10.15.3
