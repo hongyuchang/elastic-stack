@@ -21,13 +21,13 @@ cat >>/etc/security/limits.conf<<eof
 * hard nofile 65535
 eof
 
-soft nproc: 可打开的文件描述符的最大数(软限制)
+soft nofile: 可打开的文件描述符的最大数(软限制)
 
-hard nproc： 可打开的文件描述符的最大数(硬限制)
+hard nofile： 可打开的文件描述符的最大数(硬限制)
 
-soft nofile：单个用户可用的最大进程数量(软限制)
+soft nproc：单个用户可用的最大进程数量(软限制)
 
-hard nofile：单个用户可用的最大进程数量(硬限制)
+hard nproc：单个用户可用的最大进程数量(硬限制)
 ####
 
 修改 /etc/sysctl.conf 
@@ -50,7 +50,28 @@ JAVA_HOME=$HOME/jdk
 PATH=$JAVA_HOME/bin:$PATH
 export JAVA_HOME PATH
 
+ 2.2部署elasticsearch
+    准备安装包在主机192.168.21.129，192.168.21.131, 192.168.21.132分别部署
+    修改配置文件
+[elastic@master config]$ cat elasticsearch.yml     
+ cluster.name: test
+ node.name: node-1
+ node.master: true 
+ node.data: true 
+ node.ingest: false
+ path.data: /home/elastic/elasticsearch-6.5.1/data
+ path.logs: /home/elastic/elasticsearch-6.5.1/logs
+ bootstrap.memory_lock: true
+ network.host: 192.168.21.129
+ http.port: 9200
+ transport.tcp.port: 9300
+ discovery.zen.ping.unicast.hosts: ["192.168.21.129:9300", "192.168.21.131:9300", "192.168.21.132:9300"]
 
+启动 ./elasticsearch -d
+验证看日志，使用命令查看
+[elastic@master ~]$ curl 'http://192.168.21.129:9200/_cat/health' 
+1554952564 03:16:04 test green 3 3 0 0 0 0 0 0 - 100.0%
+    
   
 
 
