@@ -7,7 +7,11 @@ tar xf node-v10.15.3-linux-x64.tar.xz
 NODE_HOME=$HOME/node-v10.15.3-linux-x64
 PATH=$NODE_HOME/bin:$PATH
 export NODE_HOME PATH
-
 验证
 [elastic@master ~]$ node -v
 v10.15.3
+
+下载elasticsearch-head
+[elastic@master ~]$ git clone https://github.com/mobz/elasticsearch-head.git
+[elastic@master ~]$ cd elasticsearch-head
+[elastic@master ~]$ npm install
