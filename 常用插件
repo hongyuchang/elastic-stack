@@ -15,3 +15,9 @@ v10.15.3
 [elastic@master ~]$ git clone https://github.com/mobz/elasticsearch-head.git
 [elastic@master ~]$ cd elasticsearch-head
 [elastic@master ~]$ npm install
+
+启动
+cd  /home/elastic/chy/elasticsearch-head/node_modules/grunt/node_modules/grunt-cli/bin
+nohup ./grunt  server &
+访问地址
+http://192.168.21.129:9100/
