@@ -1,0 +1,52 @@
+centos7 安装grafana
+配置yum源
+#https://grafana.com/docs/installation/rpm/
+#
+[root@localhost yum.repos.d]# cat grafana.repo 
+[grafana]
+name=grafana
+baseurl=https://packages.grafana.com/oss/rpm
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+
+yum 安装 
+# yum -y install grafana
+
+#重载systemd配置
+[root@localhost yum.repos.d]# systemctl daemon-reload
+#启动
+[root@localhost yum.repos.d]# systemctl start grafana-server
+#查看状态
+[root@localhost yum.repos.d]# systemctl status grafana-server
+● grafana-server.service - Grafana instance
+   Loaded: loaded (/usr/lib/systemd/system/grafana-server.service; disabled; vendor preset: disabled)
+   Active: active (running) since 一 2019-04-15 16:57:54 CST; 8s ago
+     Docs: http://docs.grafana.org
+ Main PID: 7806 (grafana-server)
+   CGroup: /system.slice/grafana-server.service
+           └─7806 /usr/sbin/grafana-server --config=/etc/grafana/grafana.ini --pidfile=/var/run/grafana/grafana-server.pid --packaging=rpm cfg:default.paths.logs=/var/log/grafana cfg:default.paths.data=/v...
+
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing ServerLockService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing TracingService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing UsageStatsService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing UserAuthTokenService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing CleanUpService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing NotificationService" logger=server
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing ProvisioningService" logger=server
+4月 15 16:57:54 localhost.localdomain systemd[1]: Started Grafana instance.
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="Initializing Stream Manager"
+4月 15 16:57:54 localhost.localdomain grafana-server[7806]: t=2019-04-15T16:57:54+0800 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+[root@localhost yum.repos.d]# systemctl enable grafana-server.service
+Created symlink from /etc/systemd/system/multi-user.target.wants/grafana-server.service to /usr/lib/systemd/system/grafana-server.service.
+#
+#开机自启动
+[root@localhost yum.repos.d]# systemctl enable grafana-server.service
+#访问地址
+http://192.168.21.132:3000/login
+
+
+
